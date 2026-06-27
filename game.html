@@ -201,13 +201,12 @@ function update() {
 
   // Door check
   if (collected >= TOTAL_TOOLS && rectOverlap(player, door)) {
-    gameState = 'win';
-    terminalTimer = 0;
-    terminalText = '';
-    terminalIndex = 0;
+    // Instant portfolio reveal — no typing animation
+    gameState = 'portfolio';
+    document.getElementById('terminal').innerHTML = PORTFOLIO.replace(/\n/g,'<br>').replace(/\s\s/g,'&nbsp;&nbsp;') + '<span class="cursor">█</span>';
     document.getElementById('terminal').style.display = 'block';
-    document.getElementById('terminal').innerHTML = '';
-    // Spawn celebration particles
+    document.getElementById('hud').style.display = 'none';
+    // Celebration particles
     for (let i=0;i<40;i++) particles.push({
       x:door.x+10, y:door.y,
       vx:(Math.random()-0.5)*6, vy:Math.random()*-6-2,
